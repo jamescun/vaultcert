@@ -26,7 +26,7 @@ func main() {
 
 	// new CertificateManager for a single hostname,
 	// all others will be rejected.
-	sm := NewSingleCert("demo.example.org")
+	sm := vaultcert.NewSingleCert("demo.example.com")
 
 	// create a new crypto/tls.Config compatible GetCertificate function
 	// with our Vault client, the single certificate manager we created above,
@@ -34,7 +34,7 @@ func main() {
 	//
 	// PKI Secret Backend used in this example was created like example here:
 	// https://www.vaultproject.io/docs/secrets/index.html
-	getCertificate := GetCertificate(vc, sm, "pki/", "example-dot-com")
+	getCertificate := vaultcert.GetCertificate(vc, sm, "pki/", "example-dot-com")
 
 	s := &http.Server{
 		Addr: ":443",
